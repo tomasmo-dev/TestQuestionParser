@@ -1,0 +1,57 @@
+﻿@model HomeIndexUploadModel
+
+@if(ViewData["Error"] != null)
+{
+    <h3 style="color: red;">@ViewData["Error"]</h3>
+}
+@if(ViewData["Success"] != null)
+{
+    <h3 style="color: green;">@ViewData["Success"]</h3>
+}
+
+<form asp-controller="Home" asp-action="PostData" method="post" enctype="multipart/form-data">
+    
+    @Html.ValidationSummary()
+    
+    <h3>Index's are from 0</h3>
+    
+    <label for="fin">
+        Upload Excel File
+        <input type="file"
+               accept=".xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+               asp-for="ExcelFile" id="fin" required aria-required="true"/>
+    </label>
+
+
+
+    <label for="skipCnt">
+        Skip Worksheets Number
+        <input type="number" id="skipCnt" asp-for="SkipWorksheetCount" placeholder="Skip Count" required aria-required="true" value="1"/>
+    </label>
+
+
+
+    <div class="grid">
+        <label for="cCol">
+            Correct Column Index
+            <input type="number" id="cCol" asp-for="CorrectColIndex" placeholder="Correct Column" required aria-required="true" value="0"/>
+        </label>
+
+        <label for="lCol">
+            Label Column Index
+            <input type="number" id="lCol" asp-for="LabelColIndex" placeholder="Label Column" required aria-required="true" value="1"/>
+        </label>
+
+        <label for="vCol">
+            Value Column Index
+            <input type="number" id="vCol" asp-for="ValueColIndex" placeholder="Value Column" required aria-required="true" value="2"/>
+        </label>
+
+        <label>
+            Image Column Index
+            <input type="number" asp-for="ImageColIndex" placeholder="Image Column" required aria-required="true" value="3"/>
+        </label>
+    </div>
+
+    <input type="submit"/>
+</form>
